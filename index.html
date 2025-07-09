@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Multi Marker by Sub District</title>
+    <title>Multi Marker Sub District Map</title>
     <meta charset="utf-8" />
     <style>
-      html, body, #map {
+      html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+      #map {
+        width: 100%;
+        height: 100%;
+      }
     </style>
-
-    <!-- Google Maps JavaScript API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5vTntqv0iQwm8W_ZAK9WQHHzovAUEokw"></script>
-
     <script>
       function initMap() {
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 11,
-          center: { lat: 8.45, lng: 99.90 }
+          center: { lat: 8.45, lng: 99.90 },
+          zoom: 11
         });
 
         const data = [
@@ -28,7 +29,7 @@
           { name: "มานะ ตั้งใจ", lat: 8.465, lng: 99.910, subdistrict: "บ้านนา" }
         ];
 
-        const colorBySubDistrict = {
+        const colors = {
           "บ้านนา": "green",
           "ในเมือง": "red",
           "คลองใหญ่": "blue"
@@ -42,7 +43,7 @@
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               scale: 10,
-              fillColor: colorBySubDistrict[p.subdistrict] || "gray",
+              fillColor: colors[p.subdistrict] || "gray",
               fillOpacity: 1,
               strokeWeight: 0
             }
@@ -55,4 +56,3 @@
     <div id="map"></div>
   </body>
 </html>
-
