@@ -1,1 +1,58 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5vTntqv0iQwm8W_ZAK9WQHHzovAUEokw"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multi Marker by Sub District</title>
+    <meta charset="utf-8" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5vTntqv0iQwm8W_ZAK9WQHHzovAUEokw"></script>
+
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 11,
+          center: { lat: 8.45, lng: 99.90 }
+        });
+
+        const data = [
+          { name: "สมชาย ใจดี", lat: 8.452, lng: 99.902, subdistrict: "บ้านนา" },
+          { name: "สมศรี ใจงาม", lat: 8.460, lng: 99.905, subdistrict: "ในเมือง" },
+          { name: "เจนจิรา บุญมาก", lat: 8.470, lng: 99.895, subdistrict: "คลองใหญ่" },
+          { name: "มานะ ตั้งใจ", lat: 8.465, lng: 99.910, subdistrict: "บ้านนา" }
+        ];
+
+        const colorBySubDistrict = {
+          "บ้านนา": "green",
+          "ในเมือง": "red",
+          "คลองใหญ่": "blue"
+        };
+
+        data.forEach(p => {
+          new google.maps.Marker({
+            position: { lat: p.lat, lng: p.lng },
+            map,
+            title: p.name + " (" + p.subdistrict + ")",
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 10,
+              fillColor: colorBySubDistrict[p.subdistrict] || "gray",
+              fillOpacity: 1,
+              strokeWeight: 0
+            }
+          });
+        });
+      }
+    </script>
+  </head>
+  <body onload="initMap()">
+    <div id="map"></div>
+  </body>
+</html>
+
